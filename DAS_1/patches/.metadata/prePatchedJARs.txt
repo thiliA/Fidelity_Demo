@@ -1,0 +1,2 @@
+org.wso2.carbon.event.receiver.core_5.0.11.SNAPSHOT.jar:e92877b0e46684b5582312d0b3e607b3
+siddhi-core_3.0.4.jar:fa92bfe434cc7d740e0160b30d2c3163

@@ -1,0 +1,12 @@
+{
+  "name": "MappedJMXProfileForCPULoad",
+  "version": "1.0.0",
+  "nickName": "",
+  "description": "",
+  "payloadData": [
+    {
+      "name": "jvmOsCpuLoadProcessValue",
+      "type": "DOUBLE"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "MappedJMXProfileForMemoryUsage",
+  "version": "1.0.0",
+  "nickName": "",
+  "description": "",
+  "payloadData": [
+    {
+      "name": "jvmMemoryHeapUsage",
+      "type": "LONG"
+    }
+  ]
+}

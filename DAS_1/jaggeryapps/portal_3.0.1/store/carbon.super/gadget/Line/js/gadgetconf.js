@@ -1,0 +1,1 @@
+var gadgetConfig ={"id":"Line","title":"Line","datasource":"NotificationStream:1.0.0","type":"realtime","columns":[{"name":"TIMESTAMP","type":"time"},{"name":"type","type":"string"},{"name":"numOfEvents","type":"long"}],"maxUpdateValue":0,"chartConfig":{"chartType":"line","yAxis":[2],"xAxis":1,"interpolationMode":"monotone"},"domain":"carbon.super"};

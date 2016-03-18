@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eventPublisher name="UIPublisherForMemoryUsage" statistics="disable"
+  trace="disable" xmlns="http://wso2.org/carbon/eventpublisher">
+  <from streamName="jmx.agent.JMXProfileForMemoryUsage" version="1.0.0"/>
+  <mapping customMapping="enable" type="wso2event">
+    <to streamName="MappedJMXProfileForMemoryUsage" version="1.0.0"/>
+    <payloadData>
+      <property>
+        <from name="org.wso2.carbon.metrics:name=jvm.memory.heap.used_Value"/>
+        <to name="jvmMemoryHeapUsage" type="long"/>
+      </property>
+    </payloadData>
+  </mapping>
+  <to eventAdapterType="ui"/>
+</eventPublisher>

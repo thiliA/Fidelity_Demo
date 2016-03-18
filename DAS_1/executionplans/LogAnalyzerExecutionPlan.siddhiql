@@ -1,0 +1,38 @@
+/* Enter a unique ExecutionPlan */
+@Plan:name('LogAnalyzerExecutionPlan')
+
+/* Enter a unique description for ExecutionPlan */
+-- @Plan:description('Analyse logs according to the exception type and alert via email')
+
+/* define streams/tables and write queries here ... */
+
+@Import('groupedExceptionStream:1.0.0')
+define stream groupedExceptionStream (class string, eventTimeStamp string, trace string, type string);
+
+@Export('getCountByTypeStream:1.0.0')
+define stream getCountByTypeStream (type string, numOfEvents long);
+
+@Export('NotificationStream:1.0.0')
+define stream OutputStream (type string, InitialCount long, MidCount long, FinalCount long, trace string);
+
+@Export('persistEventStream:1.0.0')
+define stream persistEventStream (type string, InitialCount long, MidCount long, FinalCount long);
+
+partition with (type of groupedExceptionStream)
+begin 
+from groupedExceptionStream#window.timeBatch(20 sec)
+select type,count() as numOfEvents,trace 
+insert into #innerGetCountByTypeStream;
+
+from #innerGetCountByTypeStream
+select type,numOfEvents
+insert into getCountByTypeStream;
+
+from e1= #innerGetCountByTypeStream,e2= #innerGetCountByTypeStream[numOfEvents>e1.numOfEvents],e3= #innerGetCountByTypeStream[numOfEvents>e2.numOfEvents]
+select e1.type,e1.numOfEvents as InitialCount,e2.numOfEvents as MidCount,e3.numOfEvents as FinalCount,e1.trace
+insert into OutputStream;
+end;
+
+from OutputStream 
+select type,InitialCount,MidCount,FinalCount
+insert into persistEventStream;

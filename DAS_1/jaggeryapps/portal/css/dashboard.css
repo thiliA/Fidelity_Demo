@@ -1,0 +1,159 @@
+/**
+ * Gadget maximization
+ */
+.ues-component-box.ues-component-fullview {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 2000;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+}
+
+/**
+ * Gadget containers
+ */
+.ues-component-box {
+    margin-bottom: 30px;
+}
+
+/**
+ * Gadget settings
+ */
+.gadget-setting {
+    padding: 6px 12px;
+    height: calc(100% - 42px);
+    background: #fff;
+    overflow: auto;
+}
+
+.gadget-setting h4 {
+    padding-bottom: 6px;
+    border-bottom: 1px solid #ddd;
+}
+.gadget-setting label {
+    display: block;
+}
+
+.gadget-setting textarea {
+    width: 100%;
+}
+
+/**
+ * Theme overrides
+ */
+@media screen and (min-width: 768px) {
+    .container .gadgets-grid {
+        padding: 40px 0 0 0;
+    }
+    
+    .page-header .container-fluid {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+
+.gadget-title {
+    width: calc(100% - 110px);
+}
+
+.page-title h1 span {
+    font-size: 16px;
+    display: inline-block
+}
+
+.page-title h1 span a {
+    color: #aaa;
+    display: inline-block;
+    float: right;
+}
+
+.page-title h1 span a:hover {
+    color: #000;
+}
+
+.dashboard .page-header .page-title > h1 {
+    padding: 20px 0;
+    font-size: 25px;
+}
+
+.page-header .page-title > h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+/**
+ * Banner
+ */
+.ues-banner-placeholder {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media screen and (max-width: 767px) {
+    .ues-banner-placeholder {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .container-fluid .ues-banner-placeholder {
+        margin-left: 15px;
+        width: calc(100% - 30px);
+    }
+}
+
+/**
+ * Component styles
+ */
+.ues-component-title-center .gadget-title {
+    text-align: center;
+}
+
+.ues-component-title-left .gadget-title {
+    text-align: left;
+}
+
+.ues-component-title-right .gadget-title {
+    text-align: right;
+}
+
+.ues-no-heading .ues-component-heading {
+    display: none;
+}
+
+.ues-component {
+    height: 100%;
+}
+
+/**
+ * Auth menu
+ */
+.auth-xs {
+    color: #000;
+}
+
+.auth-xs ul {
+/*    color: #000;*/
+    background-color: #fff; 
+}
+
+.auth-xs li {
+    color: #444;
+}
+
+.auth-xs li a {
+    color: #000;
+}
+
+.auth-xs li a:hover {
+    background: #eee;
+}

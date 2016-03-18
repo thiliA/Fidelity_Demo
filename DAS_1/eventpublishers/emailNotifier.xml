@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eventPublisher name="emailNotifier" statistics="disable"
+  trace="disable" xmlns="http://wso2.org/carbon/eventpublisher">
+  <from streamName="NotificationStream" version="1.0.0"/>
+  <mapping customMapping="enable" type="text">
+    <inline>{{type}} count has been increasing as {{InitialCount}},{{MidCount}},{{FinalCount}} over time !!. Please check your system configurations.
+    </inline>
+  </mapping>
+  <to eventAdapterType="email">
+    <property name="email.address">wso2dasdemo@gmail.com</property>
+    <property name="email.type">text/plain</property>
+    <property name="email.subject">Warning</property>
+  </to>
+</eventPublisher>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eventReceiver name="WSO2EventReceiver" statistics="disable"
+    trace="disable" xmlns="http://wso2.org/carbon/eventreceiver">
+    <from eventAdapterType="wso2event">
+        <property name="events.duplicated.in.cluster">false</property>
+    </from>
+    <mapping customMapping="enable" type="wso2event">
+        <from streamName="loganalyzer" version="1.0.0"/>
+        <property>
+            <from dataType="payload" name="logstream"/>
+            <to name="logstream" type="string"/>
+        </property>
+        <property>
+            <from dataType="payload" name="class"/>
+            <to name="class" type="string"/>
+        </property>
+        <property>
+            <from dataType="payload" name="eventTimeStamp"/>
+            <to name="eventTimeStamp" type="string"/>
+        </property>
+        <property>
+            <from dataType="payload" name="level"/>
+            <to name="level" type="string"/>
+        </property>
+        <property>
+            <from dataType="payload" name="trace"/>
+            <to name="trace" type="string"/>
+        </property>
+    </mapping>
+    <to streamName="mappedStream" version="1.0.0"/>
+</eventReceiver>

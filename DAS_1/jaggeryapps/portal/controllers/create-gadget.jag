@@ -1,0 +1,27 @@
+<%
+(function() {
+    if (!user) {
+        sendLogin();
+        return;
+    }
+    
+    var configs = require('/configs/designer.json');
+    
+    if (!configs.isCreateGadgetEnable) {
+        response.sendError(404, 'not found');
+        return;
+    }
+
+    if(userDomain !== (urlDomain || superDomain)) {
+        response.sendError(401, 'designer access not authorized of this tenant');
+        return;
+    }
+
+
+    if (!utils.allowed(user.roles, configs.designers)) {
+        response.sendError(401, 'designer access not authorized');
+        return;
+    }
+
+    include(utils.resolvePath('templates/create-gadget.jag'));
+} ()); %>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<templateDomain name="FilterByExceptionType">
+    <description>Filter By Exception Type Description</description>
+    <templates>
+         <template name="Filter by exception type">
+            <description>To filter logs according to their exception type</description>
+            <executionPlan>
+                <![CDATA[
+                /* Enter a unique ExecutionPlan */
+                @Plan:name('FilterByExceptionTypePlan')
+                /* Enter a unique description for ExecutionPlan */
+                -- @Plan:description('Filter by level of the log and categorize according to the exception type')
+                /* define streams and write query here ... */
+                @Import('mappedStream:1.0.0')
+		define stream InputStream (logstream string, class string, eventTimeStamp string, level string, trace string);
+
+		@Export('groupedExceptionStream:1.0.0')
+		define stream groupedExceptionStream (class string, eventTimeStamp string, trace string, type string);
+
+		define stream filteredErrorStream (class string, eventTimeStamp string, trace string);
+
+		from InputStream[level == '$levelName']
+		select class,eventTimeStamp,trace
+		insert into filteredErrorStream;
+
+		from filteredErrorStream[trace != 'null' and str:contains(trace, '$exceptionType')]
+		select class,eventTimeStamp, trace , '$type' as type
+		insert into groupedExceptionStream;
+                 ]]>
+            </executionPlan>
+            <parameters>
+                <parameter name="levelName" type="string">
+                    <displayName>Log level</displayName>
+                    <description>Filtering log level</description>
+                    <defaultValue>ERROR</defaultValue>
+                </parameter>
+                <parameter name="exceptionType" type="string">
+                    <displayName>Exception Type</displayName>
+                    <description>Exception type</description>
+                    <defaultValue>java.net.SocketException</defaultValue>
+                </parameter>
+		<parameter name="type" type="string">
+                    <displayName>Exception Label</displayName>
+                    <description>Exception name to be labeled</description>
+                    <defaultValue>Socket Exception</defaultValue>
+                </parameter>
+            </parameters>
+        </template>
+    </templates>
+    <streams>
+        <stream>
+            {
+            "streamId": "mappedStream:1.0.0",  
+  	    "name": "mappedStream",
+            "version": "1.0.0",
+  	    "nickName": "",
+  	    "description": "",
+  	    "payloadData": [
+    	    {
+            "name": "logstream",
+      	    "type": "STRING"
+    	    },
+            {
+            "name": "class",
+            "type": "STRING"
+            },
+            {
+      	    "name": "eventTimeStamp",
+            "type": "STRING"
+            },
+             {
+            "name": "level",
+            "type": "STRING"
+             },
+             {
+            "name": "trace",
+            "type": "STRING"
+             }
+             ]
+             }
+        </stream>
+        <stream>
+            {
+           "streamId": "groupedExceptionStream:1.0.0",  
+           "name": "groupedExceptionStream",
+  	   "version": "1.0.0",
+           "nickName": "",
+           "description": "",
+           "payloadData": [
+           {
+           "name": "class",
+           "type": "STRING"
+           },
+           {
+           "name": "eventTimeStamp",
+           "type": "STRING"
+           },
+           {
+           "name": "trace",
+           "type": "STRING"
+           },
+           {
+           "name": "type",
+           "type": "STRING"
+          }
+  ]
+} 
+       </stream>
+    </streams>
+</templateDomain>

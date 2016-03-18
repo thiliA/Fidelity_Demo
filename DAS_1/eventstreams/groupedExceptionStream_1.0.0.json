@@ -1,0 +1,24 @@
+{
+  "name": "groupedExceptionStream",
+  "version": "1.0.0",
+  "nickName": "",
+  "description": "",
+  "payloadData": [
+    {
+      "name": "class",
+      "type": "STRING"
+    },
+    {
+      "name": "eventTimeStamp",
+      "type": "STRING"
+    },
+    {
+      "name": "trace",
+      "type": "STRING"
+    },
+    {
+      "name": "type",
+      "type": "STRING"
+    }
+  ]
+}

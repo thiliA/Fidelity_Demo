@@ -1,0 +1,28 @@
+{
+  "name": "NotificationStream",
+  "version": "1.0.0",
+  "nickName": "",
+  "description": "",
+  "payloadData": [
+    {
+      "name": "type",
+      "type": "STRING"
+    },
+    {
+      "name": "InitialCount",
+      "type": "LONG"
+    },
+    {
+      "name": "MidCount",
+      "type": "LONG"
+    },
+    {
+      "name": "FinalCount",
+      "type": "LONG"
+    },
+    {
+      "name": "trace",
+      "type": "STRING"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eventPublisher name="UIPublisherForCPULoad" statistics="disable"
+  trace="disable" xmlns="http://wso2.org/carbon/eventpublisher">
+  <from streamName="jmx.agent.JMXProfileForCPULoad" version="1.0.0"/>
+  <mapping customMapping="enable" type="wso2event">
+    <to streamName="MappedJMXProfileForCPULoad" version="1.0.0"/>
+    <payloadData>
+      <property>
+        <from name="org.wso2.carbon.metrics:name=jvm.os.cpu.load.process_Value"/>
+        <to name="jvmOsCpuLoadProcessValue" type="double"/>
+      </property>
+    </payloadData>
+  </mapping>
+  <to eventAdapterType="ui"/>
+</eventPublisher>

@@ -1,0 +1,24 @@
+
+                
+                /* Enter a unique ExecutionPlan */
+                @Plan:name('FilterByExceptionType-SocketException')
+                /* Enter a unique description for ExecutionPlan */
+                -- @Plan:description('Filter by level of the log and categorize according to the exception type')
+                /* define streams and write query here ... */
+                @Import('mappedStream:1.0.0')
+		define stream InputStream (logstream string, class string, eventTimeStamp string, level string, trace string);
+
+		@Export('groupedExceptionStream:1.0.0')
+		define stream groupedExceptionStream (class string, eventTimeStamp string, trace string, type string);
+
+		define stream filteredErrorStream (class string, eventTimeStamp string, trace string);
+
+		from InputStream[level == 'ERROR']
+		select class,eventTimeStamp,trace
+		insert into filteredErrorStream;
+
+		from filteredErrorStream[trace != 'null' and str:contains(trace, 'java.net.SocketException')]
+		select class,eventTimeStamp, trace , 'Socket Exception' as type
+		insert into groupedExceptionStream;
+                 
+            

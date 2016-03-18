@@ -1,0 +1,28 @@
+{
+  "name": "mappedStream",
+  "version": "1.0.0",
+  "nickName": "",
+  "description": "",
+  "payloadData": [
+    {
+      "name": "logstream",
+      "type": "STRING"
+    },
+    {
+      "name": "class",
+      "type": "STRING"
+    },
+    {
+      "name": "eventTimeStamp",
+      "type": "STRING"
+    },
+    {
+      "name": "level",
+      "type": "STRING"
+    },
+    {
+      "name": "trace",
+      "type": "STRING"
+    }
+  ]
+}

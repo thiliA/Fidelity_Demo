@@ -1,0 +1,22 @@
+{
+  "name": "jmx.agent.JMXProfileForCPULoad",
+  "version": "1.0.0",
+  "nickName": "JMX Dump",
+  "description": "JMX monitoring data",
+  "metaData": [
+    {
+      "name": "clientType",
+      "type": "STRING"
+    },
+    {
+      "name": "host",
+      "type": "STRING"
+    }
+  ],
+  "payloadData": [
+    {
+      "name": "org.wso2.carbon.metrics:name=jvm.os.cpu.load.process_Value",
+      "type": "DOUBLE"
+    }
+  ]
+}
